@@ -9,14 +9,15 @@ import Footer from './components/Footer'
 import LaunchSection from './components/LaunchSection'
 import ProjectDetails from './pages/ProjectDetails'
 import FAQ from './components/FAQ'
+import FloatingContact from './components/FloatingContact'
 
 function HomePage() {
   return (
     <div className="site-shell">
       <Navbar />
       <Hero />
-      <Stats />
       <LaunchSection />
+      <Stats />
       <Projects />
       <About />
       <FAQ />
@@ -28,9 +29,14 @@ function HomePage() {
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/projects/:slug" element={<ProjectDetails />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/projects/:slug" element={<ProjectDetails />} />
+      </Routes>
+
+      {/* ✅ ADD HERE */}
+      <FloatingContact />
+    </>
   )
 }

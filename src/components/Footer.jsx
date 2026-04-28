@@ -6,7 +6,7 @@ export default function Footer() {
         {/* LOGO + ABOUT */}
         <div>
           <img
-            src="./assets/logo.png"
+            src="/assets/logo.png"
             alt="Swadesh Developer"
             className="footer-logo"
           />

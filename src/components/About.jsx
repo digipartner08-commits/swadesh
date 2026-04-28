@@ -6,106 +6,72 @@ gsap.registerPlugin(ScrollTrigger)
 
 export default function About() {
   const sectionRef = useRef(null)
+  const contentRef = useRef(null)
   const imageWrapRef = useRef(null)
   const imageRef = useRef(null)
-  const contentRef = useRef(null)
-  const cardsRef = useRef([])
+  const bgTextRef = useRef(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.set(imageWrapRef.current, {
+      gsap.from(contentRef.current.children, {
         opacity: 0,
-        x: -80,
-      })
-
-      gsap.set(contentRef.current, {
-        opacity: 0,
-        x: 80,
-      })
-
-      gsap.set(cardsRef.current, {
-        opacity: 0,
-        y: 60,
-      })
-
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: 'top 75%',
-        onEnter: () => {
-          gsap.to(imageWrapRef.current, {
-            opacity: 1,
-            x: 0,
-            duration: 1.1,
-            ease: 'power3.out',
-          })
-
-          gsap.to(contentRef.current, {
-            opacity: 1,
-            x: 0,
-            duration: 1.1,
-            ease: 'power3.out',
-            delay: 0.15,
-          })
-
-          gsap.to(cardsRef.current, {
-            opacity: 1,
-            y: 0,
-            duration: 0.9,
-            stagger: 0.18,
-            ease: 'power3.out',
-            delay: 0.3,
-          })
-        },
-        onLeaveBack: () => {
-          gsap.set(imageWrapRef.current, {
-            opacity: 0,
-            x: -80,
-          })
-
-          gsap.set(contentRef.current, {
-            opacity: 0,
-            x: 80,
-          })
-
-          gsap.set(cardsRef.current, {
-            opacity: 0,
-            y: 60,
-          })
+        y: 45,
+        duration: 1,
+        stagger: 0.16,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 70%',
         },
       })
 
-      gsap.to(imageRef.current, {
-        y: -35,
+      gsap.from(imageWrapRef.current, {
+        opacity: 0,
+        x: 90,
+        duration: 1.3,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 70%',
+        },
+      })
+gsap.fromTo(
+  bgTextRef.current,
+  {
+    xPercent: 8,
+  },
+  {
+    xPercent: -8,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: sectionRef.current,
+      start: 'top bottom',
+      end: 'bottom top',
+      scrub: 1.6,
+    },
+  }
+)
+
+gsap.to(imageRef.current, {
+  y: -28,
+  scale: 1.035,
+  ease: 'none',
+  scrollTrigger: {
+    trigger: sectionRef.current,
+    start: 'top bottom',
+    end: 'bottom top',
+    scrub: 1.3,
+  },
+})
+
+      gsap.to(bgTextRef.current, {
+        x: -160,
         ease: 'none',
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top bottom',
           end: 'bottom top',
-          scrub: true,
-        },
-      })
-
-      gsap.to('.about-premium-glow-1', {
-        y: -60,
-        x: 20,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true,
-        },
-      })
-
-      gsap.to('.about-premium-glow-2', {
-        y: 50,
-        x: -25,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true,
+          scrub: 1.8,
         },
       })
     }, sectionRef)
@@ -114,86 +80,40 @@ export default function About() {
   }, [])
 
   return (
-    <section className="about-section about-premium-section" id="about" ref={sectionRef}>
-      <div className="about-premium-glow about-premium-glow-1"></div>
-      <div className="about-premium-glow about-premium-glow-2"></div>
+    <section className="about-ss-section" id="about" ref={sectionRef}>
+      <div className="container about-ss-grid">
+        <div className="about-ss-content" ref={contentRef}>
+          <p className="about-ss-tag">SWADESH DEVELOPERS</p>
 
-      <div className="container about-premium-grid">
-        {/* LEFT IMAGE */}
-        <div className="about-premium-image-wrap" ref={imageWrapRef}>
-          <div className="about-premium-image-card" ref={imageRef}>
-            <img
-              src="/assets/about-building.jpg"
-              alt="Swadesh Developers premium project"
-              className="about-premium-image"
-            />
-
-            <div className="about-premium-badge about-premium-badge-top">
-              <span className="about-premium-badge-number">10+</span>
-              <span className="about-premium-badge-text">Years of Vision</span>
-            </div>
-
-            <div className="about-premium-badge about-premium-badge-bottom">
-              <span className="about-premium-badge-number">Premium</span>
-              <span className="about-premium-badge-text">Living Experience</span>
-            </div>
-          </div>
-        </div>
-
-        {/* RIGHT CONTENT */}
-        <div className="about-premium-content" ref={contentRef}>
-          <p className="about-tag">Who We Are</p>
-
-          <h2 className="about-title">
-            Crafting spaces with <span>trust, style,</span> and long-term value
+          <h2 className="about-ss-title">
+            REAL ESTATE IN <br />
+            SURAT
           </h2>
 
-          <p className="about-text">
-            Swadesh Developers focuses on premium real estate development in
-            Surat, Gujarat, with a strong commitment to design quality,
-            functionality, and customer satisfaction. Every project is carefully
-            planned to deliver better living, strong construction, and a refined
-            lifestyle experience for modern families.
+          <p className="about-ss-text">
+            Trust is built through consistent commitment, thoughtful planning,
+            and a dedication to quality. Swadesh Developers creates premium
+            residential spaces with refined design, strong construction, and
+            long-term value for modern families.
           </p>
 
-          <div className="about-premium-cards">
-            <div
-              className="about-card about-card-premium"
-              ref={(el) => (cardsRef.current[0] = el)}
-            >
-              <span className="about-card-number">01</span>
-              <h3>Luxury Design</h3>
-              <p>
-                Premium elevation, modern layouts, and refined aesthetic details
-                that enhance everyday living.
-              </p>
-            </div>
-
-            <div
-              className="about-card about-card-premium"
-              ref={(el) => (cardsRef.current[1] = el)}
-            >
-              <span className="about-card-number">02</span>
-              <h3>Smart Planning</h3>
-              <p>
-                Efficient use of space, comfort-first layouts, and practical
-                design built for real life.
-              </p>
-            </div>
-
-            <div
-              className="about-card about-card-premium"
-              ref={(el) => (cardsRef.current[2] = el)}
-            >
-              <span className="about-card-number">03</span>
-              <h3>Trusted Quality</h3>
-              <p>
-                Built with strong materials and a commitment to long-term value
-                and durability.
-              </p>
-            </div>
-          </div>
+          <a href="#projects" className="about-ss-btn">
+            Know More
+          </a>
         </div>
+
+        <div className="about-ss-image-wrap" ref={imageWrapRef}>
+          <img
+            ref={imageRef}
+            src="/assets/about-building.jpg"
+            alt="Swadesh Developers"
+            className="about-ss-image"
+          />
+        </div>
+      </div>
+
+      <div className="about-ss-bg-text" ref={bgTextRef}>
+        SWADESH
       </div>
     </section>
   )

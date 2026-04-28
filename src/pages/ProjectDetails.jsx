@@ -1,38 +1,38 @@
-import { useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import { projects } from '../data/projects'
-import '../styles/project-detail.css'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
+import { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import { projects } from "../data/projects";
+import "../styles/project-detail.css";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export default function ProjectDetails() {
-  const { slug } = useParams()
-  const project = projects.find((item) => item.slug === slug)
+  const { slug } = useParams();
+  const project = projects.find((item) => item.slug === slug);
 
   useEffect(() => {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
 
-    const elements = document.querySelectorAll('.pd-reveal')
+    const elements = document.querySelectorAll(".pd-reveal");
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('pd-show')
+            entry.target.classList.add("pd-show");
           } else {
-            entry.target.classList.remove('pd-show')
+            entry.target.classList.remove("pd-show");
           }
-        })
+        });
       },
       {
         threshold: 0.18,
-      }
-    )
+      },
+    );
 
-    elements.forEach((el) => observer.observe(el))
+    elements.forEach((el) => observer.observe(el));
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   if (!project) {
     return (
@@ -49,7 +49,7 @@ export default function ProjectDetails() {
         </section>
         <Footer />
       </>
-    )
+    );
   }
 
   return (
@@ -90,128 +90,169 @@ export default function ProjectDetails() {
           <div className="container pd-overview-grid">
             <div className="pd-overview-left pd-reveal pd-left">
               <p className="pd-section-tag">About Project</p>
+
               <h2 className="pd-section-title">
-                A premium address designed for modern families
+                <span className="pd-line"></span>A premium address designed for
+                modern families
               </h2>
+
               <p className="pd-section-text">
                 {project.longDescription || project.description}
               </p>
             </div>
 
             <div className="pd-overview-right pd-reveal pd-right">
-              <div className="pd-spec-card">
-                <div>
-                  <h4>Configuration</h4>
-                  <p>{project.config}</p>
-                </div>
+              <div className="pd-spec-card luxury">
+                <h4>Configuration</h4>
+                <p>{project.config}</p>
               </div>
 
-              <div className="pd-spec-card">
-                <div>
-                  <h4>Total Units</h4>
-                  <p>{project.units} Units</p>
-                </div>
+              <div className="pd-spec-card luxury">
+                <h4>Total Units</h4>
+                <p>{project.units} Units</p>
               </div>
 
-              <div className="pd-spec-card">
-                <div>
-                  <h4>Area</h4>
-                  <p>{project.area || 'Premium Planning'}</p>
-                </div>
+              <div className="pd-spec-card luxury">
+                <h4>Area</h4>
+                <p>{project.area || "Premium Planning"}</p>
               </div>
             </div>
           </div>
         </section>
+       
+       <section className="pd-section pd-section-soft">
+  <div className="container">
+    <div className="pd-section-head center">
+      <p className="pd-section-tag">Project Highlights</p>
+      <h2 className="pd-section-title">
+        Crafted for <span>Luxury Living</span>
+      </h2>
+      <p className="pd-section-text pd-highlight-intro">
+        Every detail is thoughtfully planned to deliver comfort, elegance,
+        and a refined lifestyle experience.
+      </p>
+    </div>
 
-        <section className="pd-section pd-section-soft">
-          <div className="container">
-            <div className="pd-section-head center pd-reveal pd-up">
-              <p className="pd-section-tag">Project Highlights</p>
-              <h2 className="pd-section-title">
-                Crafted for <span>Luxury Living</span>
-              </h2>
-            </div>
-
-            <div className="pd-highlights-grid">
-              {(project.highlights || []).map((item, index) => (
-                <div
-                  key={index}
-                  className="pd-highlight-card pd-reveal pd-up"
-                  style={{ transitionDelay: `${index * 0.08}s` }}
-                >
-                  <div className="pd-highlight-icon">✓</div>
-                  <span>{item}</span>
-                </div>
-              ))}
-            </div>
+    <div className="pd-highlights-grid premium-highlights">
+      {(project.highlights || []).map((item, index) => (
+        <div key={index} className="pd-highlight-card">
+          
+          <div className="pd-highlight-count">
+            {String(index + 1).padStart(2, "0")}
           </div>
-        </section>
+
+          <div className="pd-highlight-content">
+            <h3>{item}</h3>
+            <p>
+              Designed to enhance everyday living with premium planning and
+              thoughtful execution.
+            </p>
+          </div>
+
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
 
         <section className="pd-section">
-          <div className="container">
-            <div className="pd-section-head center pd-reveal pd-up">
-              <p className="pd-section-tag">Gallery</p>
-              <h2 className="pd-section-title">Visual Experience</h2>
-            </div>
+  <div className="container">
+    <div className="pd-section-head center">
+      <p className="pd-section-tag">Gallery</p>
+      <h2 className="pd-section-title">
+        Visual <span>Experience</span>
+      </h2>
+    </div>
 
-            <div className="pd-gallery-grid">
-              {(project.gallery || []).map((img, index) => (
-                <div
-                  className="pd-gallery-card pd-reveal pd-zoom"
-                  key={index}
-                  style={{ transitionDelay: `${index * 0.08}s` }}
-                >
-                  <img src={img} alt={`${project.title} ${index + 1}`} />
-                </div>
-              ))}
-            </div>
+    <div className="pd-gallery-grid">
+      {(project.gallery || []).map((img, index) => (
+        <div
+          className="pd-gallery-card"
+          key={index}
+          onClick={() => {
+            document.body.classList.add("gallery-open");
+            document.querySelector(".pd-lightbox-img").src = img;
+          }}
+        >
+          <img src={img} alt={`${project.title} ${index + 1}`} />
+
+          <div className="pd-gallery-overlay">
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <p>View Image</p>
           </div>
-        </section>
+        </div>
+      ))}
+    </div>
 
-        <section className="pd-section pd-section-soft">
-          <div className="container pd-plan-wrap">
-            <div className="pd-plan-content pd-reveal pd-left">
-              <p className="pd-section-tag">Floor Plan</p>
-              <h2 className="pd-section-title">Thoughtfully planned spaces</h2>
-              <p className="pd-section-text">
-                Explore layouts designed for better comfort, practical use, and
-                a refined living experience.
-              </p>
-            </div>
+    <div
+      className="pd-lightbox"
+      onClick={() => document.body.classList.remove("gallery-open")}
+    >
+      <button
+        className="pd-lightbox-close"
+        onClick={() => document.body.classList.remove("gallery-open")}
+      >
+        ×
+      </button>
 
-            <div
-              className="pd-plan-card pd-plan-card-interactive pd-reveal pd-right"
-              onMouseMove={(e) => {
-                const card = e.currentTarget
-                const img = card.querySelector('.pd-plan-image')
+      <img className="pd-lightbox-img" src="" alt="Gallery Preview" />
+    </div>
+  </div>
+</section>
 
-                const rect = card.getBoundingClientRect()
-                const x = ((e.clientX - rect.left) / rect.width) * 100
-                const y = ((e.clientY - rect.top) / rect.height) * 100
+       <section className="pd-section pd-section-soft pd-floor-luxury">
+  <div className="container pd-floor-grid">
+    <div className="pd-floor-content">
+      <p className="pd-section-tag">Floor Plan</p>
 
-                if (img) {
-                  img.style.transformOrigin = `${x}% ${y}%`
-                  img.style.transform = 'scale(1.9)'
-                }
-              }}
-              onMouseLeave={(e) => {
-                const img = e.currentTarget.querySelector('.pd-plan-image')
-                if (img) {
-                  img.style.transformOrigin = 'center center'
-                  img.style.transform = 'scale(1)'
-                }
-              }}
-            >
-              <div className="pd-plan-image-wrap">
-                <img
-                  src={project.planImage || project.image}
-                  alt={project.title}
-                  className="pd-plan-image"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
+      <h2 className="pd-section-title">
+        Thoughtfully planned <span>premium spaces</span>
+      </h2>
+
+      <p className="pd-section-text">
+        Explore layouts designed for better comfort, smart space usage, and a refined living experience.
+      </p>
+
+      <div className="pd-floor-points">
+        <div>Smart Space Planning</div>
+        <div>Comfort-Focused Layout</div>
+        <div>Premium Living Flow</div>
+      </div>
+    </div>
+
+    <div
+      className="pd-floor-card"
+      onMouseMove={(e) => {
+        const img = e.currentTarget.querySelector(".pd-floor-image");
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+        if (img) {
+          img.style.transformOrigin = `${x}% ${y}%`;
+          img.style.transform = "scale(1.75)";
+        }
+      }}
+      onMouseLeave={(e) => {
+        const img = e.currentTarget.querySelector(".pd-floor-image");
+        if (img) {
+          img.style.transformOrigin = "center center";
+          img.style.transform = "scale(1)";
+        }
+      }}
+    >
+      <div className="pd-floor-frame">
+        <img
+          src={project.planImage || project.image}
+          alt={project.title}
+          className="pd-floor-image"
+        />
+      </div>
+
+      <div className="pd-floor-badge">Hover to Zoom</div>
+    </div>
+  </div>
+</section>
 
         <section className="pd-section">
           <div className="container">
@@ -303,5 +344,5 @@ export default function ProjectDetails() {
 
       <Footer />
     </>
-  )
+  );
 }

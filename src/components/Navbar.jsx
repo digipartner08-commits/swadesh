@@ -1,12 +1,19 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { HiOutlineMenuAlt3, HiOutlineX } from 'react-icons/hi'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 40)
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
-    <header className="navbar">
+    <header className={`navbar ss-navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="container nav-inner">
         <Link to="/" className="brand" onClick={() => setOpen(false)}>
           <img src="/assets/logo.png" alt="Swadesh Developer" />

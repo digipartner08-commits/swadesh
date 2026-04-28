@@ -1,57 +1,57 @@
-import { Link } from 'react-router-dom'
-import { useEffect, useRef, useState } from 'react'
-import { projects } from '../data/projects'
+import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { projects } from "../data/projects";
 
 export default function Projects() {
-  const sectionRef = useRef(null)
-  const sliderRef = useRef(null)
-  const [inView, setInView] = useState(false)
+  const sectionRef = useRef(null);
+  const sliderRef = useRef(null);
+  const [inView, setInView] = useState(false);
 
   // 👇 CUSTOM ORDER
   const customOrder = [
-    'shivalik-crown',
-    'shivalik-classic',
-    'shivalik-greens',
-   'shivalik-candle',
-    'shivalik-lite',
-    'shivalik-valley',
-    'shivalik-residency',
-    'shivalik-homes',
-  ]
+    "shivalik-crown",
+    "shivalik-classic",
+    "shivalik-greens",
+    "shivalik-candle",
+    "shivalik-lite",
+    "shivalik-valley",
+    "shivalik-residency",
+    "shivalik-homes",
+  ];
 
- const orderedProjects = customOrder
-  .map((slug) => projects.find((p) => p.slug === slug))
-  .filter(Boolean)
-  .filter((item, index, self) =>
-    index === self.findIndex((p) => p.id === item.id)
-  )
+  const orderedProjects = customOrder
+    .map((slug) => projects.find((p) => p.slug === slug))
+    .filter(Boolean)
+    .filter(
+      (item, index, self) => index === self.findIndex((p) => p.id === item.id),
+    );
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setInView(entry.isIntersecting)
+        setInView(entry.isIntersecting);
       },
       {
         threshold: 0.2,
-        rootMargin: '0px 0px -10% 0px',
-      }
-    )
+        rootMargin: "0px 0px -10% 0px",
+      },
+    );
 
-    if (sectionRef.current) observer.observe(sectionRef.current)
+    if (sectionRef.current) observer.observe(sectionRef.current);
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   const scrollLeft = () => {
-    sliderRef.current?.scrollBy({ left: -420, behavior: 'smooth' })
-  }
+    sliderRef.current?.scrollBy({ left: -420, behavior: "smooth" });
+  };
 
   const scrollRight = () => {
-    sliderRef.current?.scrollBy({ left: 420, behavior: 'smooth' })
-  }
+    sliderRef.current?.scrollBy({ left: 420, behavior: "smooth" });
+  };
 
   return (
     <section
-      className={`ss-projects-section ${inView ? 'is-visible' : ''}`}
+      className={`ss-projects-section ${inView ? "is-visible" : ""}`}
       id="projects"
       ref={sectionRef}
     >
@@ -61,13 +61,17 @@ export default function Projects() {
             Our Projects
           </p>
           <h2 className="ss-projects-title ss-project-reveal ss-delay-2">
-            Signature Developments
+            Signature <span>Developments</span>
           </h2>
         </div>
 
         <div className="ss-slider-controls ss-project-reveal ss-delay-3">
-          <button className="ss-prev" onClick={scrollLeft}>‹</button>
-          <button className="ss-next" onClick={scrollRight}>›</button>
+          <button className="ss-prev" onClick={scrollLeft}>
+            ‹
+          </button>
+          <button className="ss-next" onClick={scrollRight}>
+            ›
+          </button>
         </div>
       </div>
 
@@ -109,5 +113,5 @@ export default function Projects() {
         </div>
       </div>
     </section>
-  )
+  );
 }
