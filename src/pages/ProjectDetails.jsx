@@ -9,30 +9,32 @@ export default function ProjectDetails() {
   const { slug } = useParams();
   const project = projects.find((item) => item.slug === slug);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
+ useEffect(() => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
 
-    const elements = document.querySelectorAll(".pd-reveal");
+  const elements = document.querySelectorAll(".pd-reveal");
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("pd-show");
-          } else {
-            entry.target.classList.remove("pd-show");
-          }
-        });
-      },
-      {
-        threshold: 0.18,
-      },
-    );
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("pd-show");
+        } else {
+          entry.target.classList.remove("pd-show");
+        }
+      });
+    },
+    { threshold: 0.18 }
+  );
 
-    elements.forEach((el) => observer.observe(el));
+  elements.forEach((el) => observer.observe(el));
 
-    return () => observer.disconnect();
-  }, []);
+  return () => observer.disconnect();
+}, [slug]); // ✅ THIS IS THE FIX
+
 
   if (!project) {
     return (
