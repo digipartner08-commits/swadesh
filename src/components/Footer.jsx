@@ -1,9 +1,9 @@
+import { Link } from "react-router-dom";
+
 export default function Footer() {
   return (
     <footer className="footer">
       <div className="container footer-inner">
-
-        {/* LOGO + ABOUT */}
         <div>
           <img
             src="/assets/logo.png"
@@ -16,38 +16,34 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* QUICK LINKS */}
         <div>
           <h4>Quick Links</h4>
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
+          <a href="/#home">Home</a>
+          <a href="/#about">About</a>
+          <a href="/#projects">Projects</a>
+          <a href="/#contact">Contact</a>
         </div>
 
-        {/* PROJECTS SECTION */}
         <div>
           <h4>Our Projects</h4>
 
-          <a href="/projects/shivalik-valley">Shivalik Valley</a>
-          <a href="/projects/shivalik-residency">Shivalik Residency</a>
-          <a href="/projects/shivalik-lite">Shivalik Lite</a>
-          <a href="/projects/shivalik-crown">Shivalik Crown</a>
-          <a href="/projects/shivalik-height">Shivalik Height</a>
-          <a href="/projects/shivalik-greens">Shivalik Greens</a>
-          <a href="/projects/shivalik-avenue">Shivalik Avenue</a>
-          <a href="/projects/shivalik-homes">Shivalik Homes</a>
+          <Link to="/projects/shivalik-valley">Shivalik Valley</Link>
+          <Link to="/projects/shivalik-residency">Shivalik Residency</Link>
+          <Link to="/projects/shivalik-lite">Shivalik Lite</Link>
+          <Link to="/projects/shivalik-crown">Shivalik Crown</Link>
+          <Link to="/projects/shivalik-candle">Shivalik Candle</Link>
+          <Link to="/projects/shivalik-greens">Shivalik Greens</Link>
+          <Link to="/projects/shivalik-classic">Shivalik Classic</Link>
+          <Link to="/projects/shivalik-homes">Shivalik Homes</Link>
         </div>
 
-        {/* CONTACT */}
         <div>
           <h4>Contact</h4>
           <p>Surat, Gujarat</p>
           <p>+91 95127 47475</p>
           <p>swadeshdevelopersinfo@gmail.com</p>
         </div>
-
       </div>
     </footer>
-  )
+  );
 }
